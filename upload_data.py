@@ -56,7 +56,6 @@ def upload_data():
     print("Data upload completed.")
 
 if __name__ == '__main__':
-    print("Script started")
     app = create_app()  
     with app.app_context():  
         upload_data()  
