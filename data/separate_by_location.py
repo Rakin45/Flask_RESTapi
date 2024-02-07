@@ -1,7 +1,7 @@
 import pandas as pd
 import os
 
-df = pd.read_csv('./data/dataset_prepared.csv')
+df = pd.read_csv('./original_data/dataset_prepared.csv')
 
 location_ids = df['Location ID'].unique()
 
