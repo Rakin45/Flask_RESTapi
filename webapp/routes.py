@@ -1,6 +1,8 @@
 from flask import current_app as app
+from flask import Blueprint
 
+bp = Blueprint('bp', __name__)
 
-@app.route('/')
+@bp.route('/')
 def hello():
-  return f"Hello Everyone!"
+    return "Hello, Everyone!"
