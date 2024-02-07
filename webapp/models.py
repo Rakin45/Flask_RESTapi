@@ -1,4 +1,5 @@
 from typing import List
+from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import Integer, String, ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from webapp import db
@@ -34,7 +35,7 @@ class UploadedData(db.Model):
     location_id: Mapped[int] = mapped_column(db.Integer, db.ForeignKey('locations.location_id'), nullable=False)
     data: Mapped[str] = mapped_column(db.String, nullable=False)
     
-    # Define relationships with 'backref' and 'back_populates'
+    # Define relationships with backref to allow for querying from the other side
     user: Mapped[User] = relationship('User', backref='uploaded_data')
     location: Mapped[Location] = relationship('Location', backref='uploaded_data')
     
@@ -49,7 +50,7 @@ class VisualisationData(db.Model):
     location_id: Mapped[int] = mapped_column(db.Integer, db.ForeignKey('locations.location_id'), nullable=False)
     forecast_data: Mapped[str] = mapped_column(db.String, nullable=True)
     
-    # Relationships must correspond with those defined in UploadedData and Location
+    # Relationships must correspond with those defined in UploadedData and Location classes
     upload: Mapped[UploadedData] = relationship('UploadedData', back_populates='visualisation_data')
     location: Mapped[Location] = relationship('Location', back_populates='visualisation_data')
 
@@ -71,7 +72,8 @@ class WaterQualityData(db.Model):
     temp_mean: Mapped[float] = mapped_column(db.Float, nullable=True)
     temp_min: Mapped[float] = mapped_column(db.Float, nullable=True)
     temp_max: Mapped[float] = mapped_column(db.Float, nullable=True)
-    water_quality: Mapped[str] = mapped_column(db.Float, nullable=True)
+    water_quality: Mapped[float] = mapped_column(db.Float, nullable=True)
+    training: Mapped[bool] = mapped_column(db.Boolean, nullable=True)
     
     # Relationship to Location
     location: Mapped['Location'] = relationship('Location', back_populates='water_quality_data')
