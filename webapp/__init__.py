@@ -1,8 +1,10 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+from flask_marshmallow import Marshmallow
 import os
 
 db = SQLAlchemy()
+ma = Marshmallow()
 
 def create_app(test_config=None):
     app = Flask(__name__, instance_relative_config=True)
@@ -23,7 +25,7 @@ def create_app(test_config=None):
         pass
 
     db.init_app(app)
-
+    ma.init_app(app)
     from webapp import models, routes
     app.register_blueprint(routes.bp)
 
