@@ -1,0 +1,11 @@
+pytest
+pytest -v
+
+or
+
+python -m pytest
+
+coverage:
+
+pytest --cov=webapp
+
