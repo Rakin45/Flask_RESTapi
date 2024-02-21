@@ -1,6 +1,5 @@
 from webapp import ma
 from webapp.models import Location, User, UploadedData, VisualisationData, WaterQualityData
-from marshmallow_sqlalchemy import SQLAlchemyAutoSchema
 from marshmallow import fields
 
 class LocationSchema(ma.SQLAlchemyAutoSchema):
@@ -39,3 +38,19 @@ class WaterQualityDataSchema(ma.SQLAlchemyAutoSchema):
 
     # Include location details in water quality data
     location = fields.Nested(LocationSchema)
+
+
+class WaterQualityUpdateDataSchema(ma.Schema):
+    spec_cond_max = fields.Float(allow_none=True)
+    ph_max = fields.Float(allow_none=True)
+    ph_min = fields.Float(allow_none=True)
+    spec_cond_min = fields.Float(allow_none=True)
+    spec_cond_mean = fields.Float(allow_none=True)
+    dissolved_oxy_max = fields.Float(allow_none=True)
+    dissolved_oxy_mean = fields.Float(allow_none=True)
+    dissolved_oxy_min = fields.Float(allow_none=True)
+    temp_mean = fields.Float(allow_none=True)
+    temp_min = fields.Float(allow_none=True)
+    temp_max = fields.Float(allow_none=True)
+    water_quality = fields.Float(allow_none=True)
+    training = fields.Boolean(allow_none=True)
