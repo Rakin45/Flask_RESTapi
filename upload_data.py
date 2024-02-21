@@ -1,8 +1,6 @@
 import os
 import csv
-from pathlib import Path
 from datetime import datetime
-from flask import Flask
 from webapp import create_app, db
 from webapp.models import WaterQualityData
 
@@ -45,7 +43,7 @@ def process_csv_file(csv_file_path, location_id):
 
 def upload_data():
     print("Starting data upload...")
-    app = create_app({'TESTING': True})
+    app = create_app()
     with app.app_context():
         for csv_file in csv_files:
             location_id = int(csv_file.split('.')[0])  # Filename is the location ID
@@ -54,6 +52,7 @@ def upload_data():
             
         db.session.commit()
     print("Data upload completed.")
+
 
 if __name__ == '__main__':
     app = create_app()  
